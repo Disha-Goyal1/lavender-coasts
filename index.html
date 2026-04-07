@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="backend-host" content="https://api.lavendercoast.com">
+    <title>The Lavender Coast | Premium Handmade Crochet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .lavender-gradient { background: linear-gradient(135deg, #7e22ce 0%, #a855f7 100%); }
+        .product-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgba(126, 34, 206, 0.1); }
+    </style>
+</head>
+<body class="bg-[#fdfaff] text-gray-800">
+
+    <nav class="glass sticky top-0 z-50 shadow-sm border-b border-purple-100">
+        <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-purple-600 rounded-xl flex items-center justify-center text-white shadow-lg">
+                    <i data-lucide="sparkles"></i>
+                </div>
+                <h1 class="text-2xl font-bold tracking-tight text-purple-900">The Lavender Coast</h1>
+            </div>
+            
+            <div class="flex items-center space-x-6">
+                <div id="auth-ui">
+                    <button onclick="toggleLogin()" class="text-purple-600 font-bold text-sm px-6 py-2 rounded-full border-2 border-purple-100 hover:bg-purple-600 hover:text-white transition-all">
+                        Login
+                    </button>
+                </div>
+                
+                <button onclick="toggleCart()" class="relative p-2.5 bg-purple-600 text-white rounded-full shadow-xl hover:scale-110 transition-transform">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-orange-500 text-[10px] rounded-full px-1.5 font-bold border-2 border-white">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="container mx-auto px-6 py-12 grid md:grid-cols-2 gap-12 items-center border-b border-purple-50">
+        <div>
+            <h2 class="text-4xl font-extrabold text-gray-900 leading-tight mb-4">Handmade Crochet, <br><span class="text-purple-600">Purely Aesthetic.</span></h2>
+            <p class="text-gray-500 mb-6 leading-relaxed">Welcome to <b>The Lavender Coast</b>. We craft premium crochet items ranging from botanical home decor to personalized accessories. Every item is 100% handmade in India with a focus on affordability and quality.</p>
+            <div class="flex flex-wrap gap-4 text-sm font-semibold text-purple-900">
+                <span class="bg-purple-100 px-4 py-2 rounded-lg flex items-center gap-2"><i data-lucide="phone" class="w-4"></i> +91 98765 43210</span>
+                <span class="bg-purple-100 px-4 py-2 rounded-lg flex items-center gap-2"><i data-lucide="mail" class="w-4"></i> hello@lavendercoast.com</span>
+            </div>
+        </div>
+        <div class="rounded-[2.5rem] overflow-hidden border border-purple-100 shadow-xl h-80">
+    <img 
+        src="heroimage.png" 
+        alt="Handmade crochet products by The Lavender Coast"
+        class="w-full h-full object-cover"
+    >
+</div>
+    </section>
+
+    <main class="container mx-auto px-6 py-16 space-y-24">
+        
+        <section>
+            <div class="flex items-center gap-4 mb-10">
+                <h3 class="text-2xl font-bold text-purple-900">Charms & Accessories</h3>
+                <div class="h-0.5 flex-grow bg-purple-100 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-2 lg:grid-cols-5 gap-8" id="grid-acc"></div>
+        </section>
+
+        <section>
+            <div class="flex items-center gap-4 mb-10">
+                <h3 class="text-2xl font-bold text-purple-900">Home & Botanical</h3>
+                <div class="h-0.5 flex-grow bg-purple-100 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-2 lg:grid-cols-5 gap-8" id="grid-home"></div>
+        </section>
+
+        <section>
+            <div class="flex items-center gap-4 mb-10">
+                <h3 class="text-2xl font-bold text-purple-900">Bags & Fashion</h3>
+                <div class="h-0.5 flex-grow bg-purple-100 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-2 lg:grid-cols-5 gap-8" id="grid-bags"></div>
+        </section>
+
+    </main>
+
+    <section class="bg-white py-20 border-y border-purple-100">
+        <div class="container mx-auto px-6">
+            <h3 class="text-center text-3xl font-bold text-purple-900 mb-12">Customer Love</h3>
+            <div class="grid md:grid-cols-3 gap-8" id="reviews-container">
+                <div class="p-8 bg-purple-50 rounded-3xl border border-purple-100 italic relative">
+                    <i data-lucide="quote" class="absolute top-4 right-6 text-purple-200"></i>
+                    <p class="text-gray-600 mb-4">"The Lavender flower pot is simply amazing! The attention to detail is 10/10."</p>
+                    <span class="text-xs font-bold uppercase tracking-wider text-purple-600">— Ananya R.</span>
+                </div>
+                <div class="p-8 bg-purple-50 rounded-3xl border border-purple-100 italic relative">
+                    <i data-lucide="quote" class="absolute top-4 right-6 text-purple-200"></i>
+                    <p class="text-gray-600 mb-4">"Best affordable handmade items. I love my sunflower coaster set!"</p>
+                    <span class="text-xs font-bold uppercase tracking-wider text-purple-600">— Rahul V.</span>
+                </div>
+                <div class="p-8 bg-purple-50 rounded-3xl border border-purple-100 italic relative">
+                    <i data-lucide="quote" class="absolute top-4 right-6 text-purple-200"></i>
+                    <p class="text-gray-600 mb-4">"The tote bag is very aesthetic and sturdy. Perfect for my laptop and books."</p>
+                    <span class="text-xs font-bold uppercase tracking-wider text-purple-600">— Priya M.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="login-modal" class="fixed inset-0 bg-black/60 z-[100] hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-[2.5rem] shadow-2xl w-full max-w-md overflow-hidden transform transition-all">
+            <div class="lavender-gradient p-8 text-white text-center">
+                <h2 class="text-2xl font-bold">Join the Coast</h2>
+                <p class="text-xs opacity-80 mt-1">Save your address for faster delivery</p>
+            </div>
+            <form id="login-form" class="p-8 space-y-4">
+                <input type="text" id="u-name" placeholder="Full Name" required class="w-full bg-purple-50 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-purple-200 outline-none">
+                <input type="tel" id="u-phone" placeholder="10-Digit Mobile" pattern="[0-9]{10}" required class="w-full bg-purple-50 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-purple-200 outline-none">
+                <textarea id="u-address" placeholder="Shipping Address" required class="w-full bg-purple-50 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-purple-200 outline-none" rows="2"></textarea>
+                <input type="text" id="u-pin" placeholder="6-Digit Pincode" pattern="[0-9]{6}" required class="w-full bg-purple-50 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-purple-200 outline-none">
+                
+                <button type="submit" class="w-full bg-purple-600 text-white py-4 rounded-xl font-bold shadow-lg hover:bg-purple-700 transition transform hover:scale-[1.02]">
+                    Login & Continue
+                </button>
+                <button type="button" onclick="toggleLogin()" class="w-full text-gray-400 text-[10px] font-bold uppercase tracking-widest mt-2">Close</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="cart-sidebar" class="fixed inset-0 bg-black/50 z-[60] hidden">
+        <div class="absolute right-0 top-0 h-full w-full max-w-sm bg-white shadow-2xl flex flex-col">
+            <div class="bg-purple-600 p-6 text-white flex justify-between items-center">
+                <h2 class="text-xl font-bold">Your Bag</h2>
+                <button onclick="toggleCart()"><i data-lucide="x"></i></button>
+            </div>
+            <div id="cart-items" class="flex-grow p-6 space-y-4 overflow-y-auto"></div>
+            <div class="p-8 border-t bg-purple-50">
+                <div class="flex justify-between text-xl font-bold mb-6">
+                    <span>Total:</span>
+                    <span class="text-purple-600" id="cart-total">₹0</span>
+                </div>
+                <button onclick="checkout()" class="w-full bg-orange-500 text-white py-4 rounded-xl font-bold text-lg shadow-xl hover:bg-orange-600 transition uppercase tracking-widest">
+                    Place Order
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const BACKEND_HOST = window.BACKEND_HOST || window.API_HOST || document.querySelector('meta[name="backend-host"]')?.content || 'http://localhost:3000';
+        const API = {
+            products: `${BACKEND_HOST}/api/products`,
+            users: `${BACKEND_HOST}/api/users`,
+            orders: `${BACKEND_HOST}/api/orders`
+        };
+        console.info('Using backend host:', BACKEND_HOST);
+
+        const localStore = [
+            // Accessories
+            { id: 1, cat: 'acc', name: "Daisy Keychain", price: 149, img: "https://image2url.com/r2/default/images/1775568225170-6bb843ca-408f-4035-886c-96494aa2ec18.png" },
+            { id: 2, cat: 'acc', name: "Strawberry Charm", price: 99, img: "https://image2url.com/r2/default/images/1775568930873-ea3d8222-8c0b-4a99-840d-5b9e8896edce.png" },
+            { id: 3, cat: 'acc', name: "AirPod Cosy", price: 299, img: "https://image2url.com/r2/default/images/1775569913295-f249aaa2-7a8f-4ace-9018-c9220fd75e03.png"},
+            { id: 4, cat: 'acc', name: "Bow ",price: 199,img:"https://image2url.com/r2/default/images/1775570277950-5eff7391-4758-46ff-8a32-b1d5ea88733b.png"},
+            { id: 5, cat: 'acc', name: "Lip Balm Holder", price: 79, img: "https://image2url.com/r2/default/images/1775570162426-98c1cf7a-74d7-43a1-b00d-78d69d34cc4f.png"},
+            // Home
+            { id: 6, cat: 'home', name: "Lavender Pot", price: 499, img: "https://image2url.com/r2/default/images/1775571522076-c9c4c4d5-90e4-4e96-843e-85f84083d3fd.png"},
+            { id: 7, cat: 'home', name: "Sunflower Coaster", price: 349, img: "https://image2url.com/r2/default/images/1775571320893-2caecf85-6caf-4e81-8c40-f5d86aca5113.png"},
+            { id: 8, cat: 'home', name: "Wall Hanging", price: 899, img: "https://image2url.com/r2/default/images/1775571652682-18da3722-3239-453b-bc80-c3b893a6c2df.png"},
+            { id: 9, cat: 'home', name: "Tulip Bouquet", price: 699, img: "https://image2url.com/r2/default/images/1775572062875-bce9d8f7-addd-46d1-af22-a44967f59a46.png "},
+            { id: 10, cat: 'home', name: "Dining Set (4)", price: 1200, img: "https://image2url.com/r2/default/images/1775572264355-435b4d64-335f-489a-87c2-76b4dec8399e.png "},
+            // Bags
+            { id: 11, cat: 'bags', name: "Classic Tote", price: 899, img: "https://pub-1407f82391df4ab1951418d04be76914.r2.dev/uploads/30dbe9dc-18a7-41d8-bcd7-fc6259c399c4.png "},
+            { id: 12, cat: 'bags', name: "Pastel Sling", price: 599, img: "https://pub-1407f82391df4ab1951418d04be76914.r2.dev/uploads/59256367-ace5-49c2-be29-15c3948b5a04.png "},
+            { id: 13, cat: 'bags', name: "Checkered Bag", price: 1100, img: "https://pub-1407f82391df4ab1951418d04be76914.r2.dev/uploads/69aa2b66-46c5-457e-b2c4-f9ce895aa426.png "},
+            { id: 14, cat: 'bags', name: "Winter Beanie", price: 450, img: "https://pub-1407f82391df4ab1951418d04be76914.r2.dev/uploads/fb6b8eee-4188-40ca-b70d-5360240ca6f0.png "},
+            { id: 15, cat: 'bags', name: "Phone Pouch", price: 350, img: "https://pub-1407f82391df4ab1951418d04be76914.r2.dev/uploads/d19b072e-4714-4696-8de9-964c5ebdf1d9.png" }
+        ];
+
+        let store = [];
+        let cart = [];
+        let activeUser = null;
+
+        function renderStore() {
+            ['acc', 'home', 'bags'].forEach(cat => {
+                const grid = document.getElementById(`grid-${cat}`);
+                if (grid) grid.innerHTML = '';
+            });
+
+            store.forEach(p => {
+                const grid = document.getElementById(`grid-${p.cat}`);
+                if (!grid) return;
+                grid.innerHTML += `
+                    <div class="product-card bg-white rounded-3xl p-4 border border-purple-50 group shadow-sm">
+                        <div class="h-40 overflow-hidden rounded-2xl bg-purple-50 mb-4">
+                            <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        <h4 class="text-sm font-bold text-gray-700 truncate">${p.name}</h4>
+                        <p class="text-lg font-black text-purple-600 mt-1">₹${p.price}</p>
+                        <button onclick="addToCart(${p.id})" class="w-full mt-4 py-2 bg-purple-50 text-purple-600 font-bold rounded-xl text-[10px] uppercase tracking-widest hover:bg-purple-600 hover:text-white transition">Add to Bag</button>
+                    </div>
+                `;
+            });
+            lucide.createIcons();
+        }
+
+        async function fetchStoreData() {
+            try {
+                const response = await fetch(API.products);
+                if (!response.ok) throw new Error(`Product fetch failed: ${response.status}`);
+                const data = await response.json();
+                if (!Array.isArray(data) || data.length === 0) throw new Error('Invalid product data from backend');
+                store = data;
+                return;
+            } catch (error) {
+                console.warn('Backend product fetch failed, using local fallback.', error);
+                store = localStore;
+            }
+        }
+
+        async function init() {
+            lucide.createIcons();
+            await fetchStoreData();
+            renderStore();
+        }
+
+        // Auth Logic
+        function toggleLogin() { document.getElementById('login-modal').classList.toggle('hidden'); }
+        async function handleLoginSubmit(e) {
+            e.preventDefault();
+            activeUser = {
+                name: document.getElementById('u-name').value,
+                phone: document.getElementById('u-phone').value,
+                address: document.getElementById('u-address').value,
+                pin: document.getElementById('u-pin').value
+            };
+            document.getElementById('auth-ui').innerHTML = `
+                <div class="flex items-center space-x-2 bg-purple-100 px-4 py-1.5 rounded-full border border-purple-200">
+                    <i data-lucide="user-check" class="w-3 h-3 text-purple-600"></i>
+                    <span class="text-xs font-bold text-purple-900 uppercase">Hi, ${activeUser.name.split(' ')[0]}</span>
+                </div>
+            `;
+            lucide.createIcons();
+            toggleLogin();
+
+            try {
+                const response = await fetch(API.users, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(activeUser)
+                });
+                if (response.ok) {
+                    const savedUser = await response.json();
+                    if (savedUser.id) activeUser.id = savedUser.id;
+                }
+            } catch (error) {
+                console.warn('Unable to save user to backend. Continuing locally.', error);
+            }
+        }
+        document.getElementById('login-form').addEventListener('submit', handleLoginSubmit);
+
+        // Cart Logic
+        function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('hidden'); }
+        function addToCart(id) {
+            const item = store.find(p => p.id === id);
+            cart.push(item);
+            updateUI();
+        }
+        function updateUI() {
+            document.getElementById('cart-badge').innerText = cart.length;
+            const content = document.getElementById('cart-items');
+            const totalDisplay = document.getElementById('cart-total');
+            let sum = 0;
+            content.innerHTML = '';
+            cart.forEach((item, index) => {
+                sum += item.price;
+                content.innerHTML += `
+                    <div class="flex justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-purple-100">
+                        <span class="text-sm font-bold">${item.name}</span>
+                        <div class="flex items-center gap-4">
+                            <span class="text-purple-600 font-bold">₹${item.price}</span>
+                            <button onclick="remove(${index})" class="text-red-400"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        </div>
+                    </div>
+                `;
+            });
+            totalDisplay.innerText = `₹${sum}`;
+            lucide.createIcons();
+        }
+        function remove(i) { cart.splice(i, 1); updateUI(); }
+        async function checkout() {
+            if (!activeUser) { alert("Please login first to provide shipping details!"); toggleLogin(); return; }
+            if (cart.length === 0) { alert("Cart is empty!"); return; }
+
+            const order = {
+                user: activeUser,
+                items: cart,
+                total: cart.reduce((sum, item) => sum + item.price, 0),
+                placedAt: new Date().toISOString()
+            };
+
+            try {
+                const response = await fetch(API.orders, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(order)
+                });
+                if (!response.ok) throw new Error(`Order endpoint returned ${response.status}`);
+                const data = await response.json();
+                alert(`Success! Order confirmed${data.id ? ' #' + data.id : ''}.`);
+                cart = [];
+                updateUI();
+                toggleCart();
+            } catch (error) {
+                console.error('Checkout failed:', error);
+                alert('Order could not be sent to the backend. Please try again later.');
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
